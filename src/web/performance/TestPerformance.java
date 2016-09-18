@@ -1,41 +1,53 @@
-package interfaces.execute;
+package web.performance;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+import junit.framework.TestCase;
+import net.HtmlResources;
+import net.HttpRequest;
 import file.WriteFile;
 import file.TotalData;
+import file.RequestLogData;
 import interfaces.constant.RequestHeader;
 import interfaces.constant.Url;
-import interfaces.operation.Operation;
-import net.CounterThread;
 
-public class TestInterfaces{
+public class TestPerformance extends TestCase {
 	private static TotalData totalData = new TotalData(0, 0, 0, 0, 0, 999999);
-	private static CounterThread counterThread = new CounterThread(); //计数器线程，用于每秒保存数据用
-	private Map<String, String> params = null;
-	private Map<String, String> pics = null;
+	
+	@Before
+	public void setUp() throws Exception {
+
+	}
+	
+	
+	@After
+	public void tearDown() throws Exception {		
+	
+	}
 	
 	/**
-	 * 测试入口，调用对应的实现方法，实现方法在operation下
+	 * 测试操作逻辑实现
 	 * @throws Exception
-	 */
+	 */	
+	@Test
 	public void test1() throws Exception {		
 		WriteFile writeFile = new WriteFile();
 		String filePath = null;
-		counterThread.isRun = true;
-		counterThread.start();
-		params = new HashMap<>();
-		params.put("username", "13486119817");
-		params.put("password", "1234567");
 		try {
 			filePath = writeFile.CreateFolder(System.getProperty("user.dir")+"\\result");
-			counterThread.setPath(filePath);
-			new Operation().postUrl(Url.Login, this.params, this.pics, RequestHeader.head, counterThread);
-			//requestLogData = new Login().open(resUrl, requestLogData);
-//			writeFile.WriteXls(filePath, requestLogData);
-//			totalData = writeFile.updataTotalData(totalData, requestLogData);
+			List<String> resUrl = HtmlResources.getHtmlResUrl(Url.URL, Url.Login, "", RequestHeader.head);
+			List<String> resUrl2 = HtmlResources.getHtmlResUrl(Url.URL, Url.Login, "", RequestHeader.head);
+			RequestLogData requestLogData = new RequestLogData();
+			requestLogData = new Login().open(resUrl, requestLogData);
+			writeFile.WriteXls(filePath, requestLogData);
+			totalData = writeFile.updataTotalData(totalData, requestLogData);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -47,7 +59,7 @@ public class TestInterfaces{
 					e.printStackTrace();
 				}
 			}
-			counterThread.isRun = false;
+			
 		}
 	}
 	

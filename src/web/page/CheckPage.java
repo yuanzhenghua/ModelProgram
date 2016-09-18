@@ -1,5 +1,6 @@
 package web.page;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -468,10 +469,14 @@ public abstract class CheckPage {
 	 * @param driver
 	 */
 	public void checkResourceLink(WebDriver driver) {
+		Map<String, String> head = new HashMap<>();
+		head.put("accept", "*/*");
+		head.put("connection", "Keep-Alive");
+		head.put("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
 		try {
-			List<String> resUrls = HtmlResources.getHtmlResUrl(driver.getCurrentUrl(), "", "");
+			List<String> resUrls = HtmlResources.getHtmlResUrl(driver.getCurrentUrl(), "", "", head);
 			for (String url : resUrls) {
-				Map<String, String> result = HttpRequest.getHtml(url, "");
+				Map<String, String> result = HttpRequest.sendGet(url, "", head);
 				if (!result.get("code").equals("200") || result.get("info").equals("")) {
 					throw new Exception("资源地址无法下载到资源:"+url+", 返回code:"+result.get("code"));
 				}
