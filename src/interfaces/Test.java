@@ -1,3 +1,4 @@
+package interfaces;
 import interfaces.execute.TestInterfaces;
 
 public class Test {

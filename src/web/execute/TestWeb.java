@@ -16,8 +16,8 @@ public class TestWeb extends TestCase {
 	@Before
 	public void setUp() throws Exception {
 		//chrome浏览器
-//		System.setProperty("webdriver.chrome.driver", "C:/Program Files (x86)/Google/Chrome/Application/chromedriver.exe");
-//		driver = new ChromeDriver();
+		System.setProperty("webdriver.chrome.driver", "C:/Program Files (x86)/Google/Chrome/Application/chromedriver.exe");
+		driver = new ChromeDriver();
 		//IE浏览器
 //		System.setProperty("webdriver.ie.driver", "C:/Program Files (x86)/Internet Explorer/IEDriverServer.64.exe");
 //		driver = new InternetExplorerDriver();

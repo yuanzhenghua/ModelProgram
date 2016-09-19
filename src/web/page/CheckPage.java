@@ -474,9 +474,9 @@ public abstract class CheckPage {
 		head.put("connection", "Keep-Alive");
 		head.put("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
 		try {
-			List<String> resUrls = HtmlResources.getHtmlResUrl(driver.getCurrentUrl(), "", "", head);
+			List<String> resUrls = HtmlResources.getHtmlResUrl(driver.getCurrentUrl(), "", null, head);
 			for (String url : resUrls) {
-				Map<String, String> result = HttpRequest.sendGet(url, "", head);
+				Map<String, String> result = HttpRequest.sendGet(url, null, head);
 				if (!result.get("code").equals("200") || result.get("info").equals("")) {
 					throw new Exception("资源地址无法下载到资源:"+url+", 返回code:"+result.get("code"));
 				}
