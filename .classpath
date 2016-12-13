@@ -5,6 +5,7 @@
 	<classpathentry kind="lib" path="libs/selenium-java-2.44.0-srcs.jar"/>
 	<classpathentry kind="lib" path="libs/selenium-java-2.44.0.jar"/>
 	<classpathentry kind="lib" path="libs/junit-4.9b4.jar"/>
+	<classpathentry kind="lib" path="libs/selenium-server-standalone-2.44.0.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Tool"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
